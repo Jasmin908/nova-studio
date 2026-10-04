@@ -1,0 +1,89 @@
+/* Chapter 1: Hero. Mobile composition first, desktop below. */
+.hero {
+  position: relative;
+  height: 100svh;
+  min-height: 32rem;
+  overflow: hidden;
+  background: var(--burgundy-deep);
+  color: var(--ivory);
+}
+
+.hero__media {
+  position: absolute;
+  inset: 0;
+}
+.hero__media picture,
+.hero__media img {
+  width: 100%;
+  height: 100%;
+}
+.hero__media img {
+  object-fit: cover;
+  object-position: 50% 30%;
+}
+/* Slow scale of about 5% as the hero leaves. */
+.motion .hero__media {
+  transform: scale(calc(1 + 0.05 * var(--hp, 0)));
+}
+
+/* Mobile: the headline sits over a fade to the burgundy sampled from the
+   photograph. */
+.hero__fade {
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 56%;
+  background: linear-gradient(to bottom, var(--hero-fade-0), var(--hero-fade) 62%);
+}
+
+.hero__meta {
+  position: absolute;
+  left: var(--pad);
+  top: calc(var(--nav-h) + 0.5rem);
+}
+.hero__meta span {
+  display: block;
+}
+
+.hero__title {
+  position: absolute;
+  left: var(--pad);
+  bottom: 2.5rem;
+  font-size: min(19.5vw, 12.5svh);
+}
+/* The headline rises slightly faster than the page. */
+.motion .hero__title {
+  transform: translateY(calc(var(--hp, 0) * -14svh));
+}
+
+.hero__cue {
+  position: absolute;
+  right: var(--pad);
+  bottom: 2.6rem;
+}
+
+@media (min-width: 900px) and (orientation: landscape) {
+  .hero {
+    min-height: 34rem;
+  }
+  .hero__media img {
+    object-position: 66% 34%;
+  }
+  .hero__fade {
+    display: none;
+  }
+  .hero__meta {
+    top: auto;
+    bottom: 1.75rem;
+  }
+  .hero__title {
+    bottom: 6.75rem;
+    font-size: min(10.4vw, 19svh);
+  }
+  /* The last line steps right until it meets the shoulder. */
+  .hero__title .rv:last-child {
+    margin-left: 2.45em;
+  }
+  .hero__cue {
+    bottom: 1.75rem;
+  }
+}

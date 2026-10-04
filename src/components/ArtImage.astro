@@ -1,0 +1,81 @@
+---
+// Art-directed <picture> built from the derivative manifest. An asset with
+// "desktop" and "mobile" variants switches crop on the same media query the
+// stylesheets use; an asset with a single "full" variant uses one frame.
+import images from '../data/images.json';
+import { DESKTOP_QUERY } from '../config/site';
+
+interface Variant {
+  width: number;
+  height: number;
+  avif: { w: number; src: string }[];
+  webp: { w: number; src: string }[];
+  fallback: string;
+}
+interface Props {
+  asset: keyof typeof images;
+  alt: string;
+  /** `sizes` for the desktop crop (or for the single frame on desktop). */
+  sizesDesktop: string;
+  /** `sizes` for the mobile crop (or for the single frame on mobile). */
+  sizesMobile: string;
+  eager?: boolean;
+}
+const { asset, alt, sizesDesktop, sizesMobile, eager = false } = Astro.props;
+
+const set = images[asset] as Record<string, Variant>;
+const srcset = (list: { w: number; src: string }[]) => list.map((i) => `${i.src} ${i.w}w`).join(', ');
+
+const sources = set.full
+  ? [{ variant: set.full, media: undefined, sizes: `${DESKTOP_QUERY} ${sizesDesktop}, ${sizesMobile}` }]
+  : [
+      { variant: set.desktop, media: DESKTOP_QUERY, sizes: sizesDesktop },
+      { variant: set.mobile, media: undefined, sizes: sizesMobile },
+    ];
+const base = set.full ?? set.mobile;
+---
+
+<picture>
+  {
+    sources.map(({ variant, media, sizes }) => (
+      <>
+        <source
+          type="image/avif"
+          media={media}
+          srcset={srcset(variant.avif)}
+          sizes={sizes}
+          width={variant.width}
+          height={variant.height}
+        />
+        <source
+          type="image/webp"
+          media={media}
+          srcset={srcset(variant.webp)}
+          sizes={sizes}
+          width={variant.width}
+          height={variant.height}
+        />
+        {/* Without AVIF or WebP, the desktop crop still gets its own JPEG;
+            the mobile crop falls through to the <img> below. */}
+        {media && (
+          <source
+            type="image/jpeg"
+            media={media}
+            srcset={variant.fallback}
+            width={variant.width}
+            height={variant.height}
+          />
+        )}
+      </>
+    ))
+  }
+  <img
+    src={base.fallback}
+    alt={alt}
+    width={base.width}
+    height={base.height}
+    loading={eager ? 'eager' : 'lazy'}
+    decoding={eager ? 'sync' : 'async'}
+    fetchpriority={eager ? 'high' : undefined}
+  />
+</picture>

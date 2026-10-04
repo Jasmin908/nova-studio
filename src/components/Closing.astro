@@ -1,0 +1,54 @@
+---
+// Chapter 5 and the footer. The call to action here is the only one on the
+// site. While FORMA_STUDIO_URL is unset it renders without an href.
+import { FORMA_STUDIO_URL } from '../config/site';
+import type { Dictionary } from '../i18n';
+import Arrow from './Arrow.astro';
+import LangToggle from './LangToggle.astro';
+
+interface Props {
+  t: Dictionary;
+}
+const { t } = Astro.props;
+
+const external = FORMA_STUDIO_URL
+  ? { href: FORMA_STUDIO_URL, target: '_blank', rel: 'noopener noreferrer' }
+  : { 'data-url-pending': '' };
+---
+
+<section class="closing" id={t.ids.appointment} data-ground="cherry">
+  <h2 class="closing__title display reveal" data-reveal="enter">
+    {
+      t.closing.lines.map((line, i) => (
+        <span class="rv" style={`--i:${i}`}>
+          <span class="rv__i">{line}</span>
+        </span>
+      ))
+    }
+  </h2>
+  <div class="closing__group">
+    <p class="closing__label meta">{t.closing.label}</p>
+    <p class="closing__disclosure serif">{t.closing.disclosure}</p>
+    <a class="closing__cta" {...external}>
+      <span>{t.closing.cta}</span>
+      <Arrow />
+      {FORMA_STUDIO_URL && <span class="sr-only">({t.a11y.newTab})</span>}
+    </a>
+  </div>
+</section>
+
+<footer class="footer" data-ground="dark">
+  <p class="footer__name">{t.footer.line1}</p>
+  <p class="serif">{t.footer.line2}</p>
+  <p class="serif">
+    {t.footer.creditPrefix}{' '}
+    <a class="footer__credit" {...external}>
+      {t.footer.creditName}
+      <Arrow diagonal />
+      {FORMA_STUDIO_URL && <span class="sr-only">({t.a11y.newTab})</span>}
+    </a>
+  </p>
+  <p class="serif">{t.footer.line4}</p>
+  <LangToggle t={t} />
+  <p class="footer__copy meta">{t.footer.copyright}</p>
+</footer>

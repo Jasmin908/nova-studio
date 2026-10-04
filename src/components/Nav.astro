@@ -1,0 +1,54 @@
+---
+import type { Dictionary } from '../i18n';
+import LangToggle from './LangToggle.astro';
+
+interface Props {
+  t: Dictionary;
+}
+const { t } = Astro.props;
+
+const links = [
+  { href: `#${t.ids.treatments}`, label: t.nav.treatments },
+  { href: `#${t.ids.studio}`, label: t.nav.studio },
+  { href: `#${t.ids.appointment}`, label: t.nav.appointment },
+];
+---
+
+<header class="nav" data-nav data-theme="ivory">
+  <a class="nav__item nav__wordmark" href="#top" data-nav-item>{t.nav.wordmark}</a>
+  <nav class="nav__right" aria-label={t.a11y.nav}>
+    <ul class="nav__links">
+      {
+        links.map((l) => (
+          <li>
+            <a class="nav__item" href={l.href} data-nav-item>
+              {l.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+    <LangToggle t={t} navItem />
+    <button class="nav__item nav__menu" type="button" data-menu-open aria-haspopup="dialog" data-nav-item>
+      {t.nav.menu}
+    </button>
+  </nav>
+</header>
+
+<dialog class="menu" data-menu aria-label={t.nav.menu}>
+  <div class="menu__bar">
+    <span class="nav__wordmark" aria-hidden="true">{t.nav.wordmark}</span>
+    <button class="nav__item" type="button" data-menu-close>{t.nav.close}</button>
+  </div>
+  <ul class="menu__list">
+    {
+      links.map((l) => (
+        <li>
+          <a class="menu__link" href={l.href} data-menu-link>
+            {l.label}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</dialog>

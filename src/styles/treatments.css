@@ -1,0 +1,161 @@
+/* Chapter 3: Treatments and pricing. Natural height, nothing scroll-linked. */
+.treat {
+  position: relative;
+  z-index: 2;
+  background: var(--ivory);
+  color: var(--black);
+  padding: clamp(4.5rem, 13svh, 9rem) 0 clamp(4rem, 12svh, 8rem);
+}
+/* The ivory panel scrolls up over the held Chapter 2 image. */
+.motion .treat {
+  margin-top: -100svh;
+}
+
+.treat__cats {
+  border-bottom: 1px solid var(--steel-line);
+}
+
+.cat {
+  position: relative;
+  border-top: 1px solid var(--steel-line);
+}
+/* Blush fill, wiping outward from the bar. */
+.cat::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--blush);
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path var(--dur) var(--ease);
+  pointer-events: none;
+}
+.cat.is-open::before {
+  clip-path: inset(0);
+}
+/* The light motif in negative: a thin, hard-edged vertical cherry bar. */
+.cat::after {
+  content: '';
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 3px;
+  background: var(--cherry);
+  opacity: 0;
+  pointer-events: none;
+}
+.cat.is-open::after {
+  opacity: 1;
+}
+
+.cat__head,
+.cat__panel {
+  position: relative;
+}
+.cat__btn {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  width: 100%;
+  min-height: 44px;
+  padding: 1.15rem var(--pad) 0.85rem;
+  text-align: left;
+}
+.cat__btn:focus-visible {
+  outline-offset: -5px;
+}
+.cat__idx {
+  flex: none;
+  width: 1.75rem;
+  color: var(--steel);
+}
+.cat__name {
+  font-size: min(17vw, 7rem);
+}
+.cat.is-open .cat__name {
+  color: var(--cherry);
+}
+@media (hover: hover) {
+  .cat__btn:hover .cat__name {
+    color: var(--cherry);
+  }
+}
+
+.cat__panel {
+  clip-path: inset(0 0 100% 0);
+  transition: clip-path var(--dur) var(--ease);
+}
+.cat.is-open .cat__panel {
+  clip-path: inset(0);
+}
+/* Without scripts every category is simply open. */
+html:not(.js) .cat__panel[hidden] {
+  display: block;
+}
+html:not(.js) .cat__panel {
+  clip-path: none;
+}
+
+.cat__list {
+  padding: 0 var(--pad) 1.25rem calc(var(--pad) + 2.5rem);
+}
+.trt {
+  display: grid;
+  gap: 0.3rem;
+  padding: 1rem 0 1.1rem;
+  border-top: 1px solid var(--steel-line);
+}
+.trt__name {
+  font-family: var(--font-g);
+  font-weight: 600;
+  font-size: 1.0625rem;
+  letter-spacing: 0.08em;
+  line-height: 1.3;
+}
+.trt__desc {
+  max-width: 36rem;
+  font-size: 1.0625rem;
+  line-height: 1.4;
+}
+.trt__figures {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 0.35rem;
+}
+
+.treat__note {
+  max-width: 34rem;
+  margin: 2.5rem var(--pad) 0 calc(var(--pad) + 2.5rem);
+  font-size: 0.9375rem;
+}
+
+@media (min-width: 900px) and (orientation: landscape) {
+  .cat__btn {
+    gap: 1.5rem;
+    padding: 1.5rem var(--pad) 1.1rem;
+  }
+  .cat__idx {
+    width: 2.5rem;
+  }
+  .cat__name {
+    font-size: clamp(4.5rem, 9.5vw, 11rem);
+  }
+  .cat__list {
+    padding: 0 var(--pad) 2rem calc(var(--pad) + 4rem);
+  }
+  .trt {
+    grid-template-columns: 11rem minmax(0, 1fr) 5.5rem 6.5rem;
+    column-gap: 2.5rem;
+    align-items: baseline;
+    padding: 1.1rem 0 1.2rem;
+  }
+  .trt__figures {
+    display: contents;
+  }
+  /* Right-aligned price column. */
+  .trt__price {
+    text-align: right;
+  }
+  .treat__note {
+    margin: 3.5rem var(--pad) 0 calc(var(--pad) + 4rem);
+    font-size: 1rem;
+  }
+}

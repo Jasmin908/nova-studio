@@ -1,0 +1,27 @@
+---
+// The single page, in both languages: five chapters in a fixed order.
+import { dictionaries, type Locale } from '../i18n';
+import Base from '../layouts/Base.astro';
+import Closing from './Closing.astro';
+import Hero from './Hero.astro';
+import Nav from './Nav.astro';
+import Statement from './Statement.astro';
+import StudioReveal from './StudioReveal.astro';
+import Treatments from './Treatments.astro';
+
+interface Props {
+  locale: Locale;
+}
+const t = dictionaries[Astro.props.locale];
+---
+
+<Base t={t}>
+  <Nav t={t} />
+  <main id="main">
+    <Hero t={t} />
+    <Statement t={t} />
+    <Treatments t={t} />
+    <StudioReveal t={t} />
+    <Closing t={t} />
+  </main>
+</Base>

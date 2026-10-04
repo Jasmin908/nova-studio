@@ -1,0 +1,167 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  background: var(--black);
+}
+
+body {
+  margin: 0;
+  background: var(--ivory);
+  color: var(--black);
+  font-family: var(--font-s);
+  font-size: 1rem;
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: clip;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+ul,
+ol,
+dl,
+dd,
+dt {
+  margin: 0;
+  padding: 0;
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+picture,
+img,
+svg {
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip {
+  position: fixed;
+  left: var(--pad);
+  top: 0.5rem;
+  z-index: 100;
+  padding: 0.75rem 1rem;
+  background: var(--ivory);
+  color: var(--black);
+  font-family: var(--font-g);
+  font-size: 0.8125rem;
+  letter-spacing: 0.08em;
+  transform: translateY(-200%);
+}
+.skip:focus {
+  transform: none;
+}
+
+/* ---------- Typography ---------- */
+
+/* Display: heavy grotesk, tight. Never hyphenated, never wrapped; line
+   breaks come only from the copy. */
+.display {
+  font-family: var(--font-g);
+  font-weight: 800;
+  font-stretch: 78%;
+  letter-spacing: -0.02em;
+  line-height: 0.86;
+  white-space: nowrap;
+  hyphens: none;
+}
+
+/* Meta: the same grotesk, small and widely tracked. */
+.meta {
+  font-family: var(--font-g);
+  font-weight: 500;
+  font-stretch: 100%;
+  font-size: 0.6875rem;
+  letter-spacing: 0.2em;
+  line-height: 1.7;
+  font-variant-numeric: tabular-nums;
+}
+
+.serif {
+  font-family: var(--font-s);
+  font-weight: 400;
+}
+
+.arrow {
+  flex: none;
+}
+
+/* ---------- Line-by-line mask reveal (hero and Chapter 5) ---------- */
+
+/* The mask is padded so Ä, Ö, Ü and descenders are never cut. */
+.rv {
+  display: block;
+  overflow: hidden;
+  padding: 0.18em 0 0.12em;
+  margin: -0.18em 0 -0.12em;
+}
+.rv__i {
+  display: block;
+}
+.motion .reveal .rv__i {
+  transform: translateY(125%);
+  transition: transform 900ms var(--ease);
+  transition-delay: calc(var(--i, 0) * 120ms);
+}
+.motion .reveal.is-in .rv__i {
+  transform: none;
+}
+.reveal.is-done .rv {
+  overflow: visible;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0s !important;
+    transition-delay: 0s !important;
+    animation-duration: 0s !important;
+  }
+}

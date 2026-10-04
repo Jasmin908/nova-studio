@@ -1,0 +1,209 @@
+/* Chapter 2: Statement and skin.
+   Default rules are the static layout (no script or reduced motion): the
+   statement on ivory followed by the full-bleed image, as two stacked
+   sections. `.motion` turns it into the pinned aperture sequence. */
+.statement {
+  /* Resting aperture, as percentages of the stage. The eye-line of the
+     close-up is at 27% of the frame height. */
+  --ap-t: 22;
+  --ap-b: 68;
+  --ap-l: 0;
+  --ap-r: 0;
+  /* The last term keeps line 1 clear of the navigation on short screens. */
+  --fs: min(17.5vw, 9.6svh, (var(--ap-t) * 1svh - var(--nav-h)) / 0.822);
+
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: var(--ivory);
+  color: var(--black);
+}
+
+.statement__stage {
+  display: contents;
+}
+
+.statement__field {
+  order: 1;
+  position: relative;
+  height: 46svh;
+  min-height: 15rem;
+  overflow: hidden;
+}
+.statement__shelf {
+  display: none;
+}
+
+.statement__lines {
+  font-size: var(--fs);
+}
+.statement__line {
+  position: absolute;
+  left: var(--pad);
+}
+/* Line 1 rests on the aperture's top edge, line 2 hangs from its bottom. */
+.statement__line--1 {
+  top: calc(var(--ap-t) * 1svh - 0.9em);
+}
+.statement__line--2 {
+  top: calc((100 - var(--ap-b)) * 1svh + 0.06em);
+}
+
+.statement__parawrap {
+  order: 2;
+  position: relative;
+}
+.statement__para {
+  padding: 0.5rem var(--pad) 4.5rem;
+  max-width: 30rem;
+  font-size: 1.0625rem;
+}
+
+.statement__window {
+  order: 3;
+  position: relative;
+  height: 100svh;
+  min-height: 30rem;
+  overflow: hidden;
+  background: var(--burgundy-deep);
+  color: var(--ivory);
+}
+.statement__window picture,
+.statement__window img {
+  width: 100%;
+  height: 100%;
+}
+/* The same percentage on both axes keeps the eye-line at 27% of the stage
+   whatever the crop. */
+.statement__window img {
+  object-fit: cover;
+  object-position: 50% 27%;
+}
+.statement__window .statement__lines {
+  display: none;
+}
+.statement__note {
+  position: absolute;
+  left: var(--pad);
+  bottom: 2rem;
+}
+
+/* ---------- Pinned sequence ---------- */
+
+/* Mobile: about 90svh of beats, then 100svh in which the image stays held
+   while Chapter 3 scrolls up over it. */
+.motion .statement {
+  display: block;
+  height: 290svh;
+}
+.motion .statement__stage {
+  display: block;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  height: 100svh;
+  overflow: hidden;
+}
+.motion .statement__field {
+  position: absolute;
+  inset: 0;
+  height: auto;
+  min-height: 0;
+}
+/* Mobile: an ivory shelf behind the statement. The paragraph scrolls away
+   beneath it before the aperture starts to open. */
+.motion .statement__shelf {
+  display: block;
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 47svh;
+  background: var(--ivory);
+}
+.motion .statement__lines {
+  position: absolute;
+  inset: 0;
+  transform: translateY(calc(var(--exit, 0) * -100svh));
+}
+.motion .statement__window {
+  position: absolute;
+  inset: 0;
+  height: auto;
+  min-height: 0;
+  /* The image never moves. Only this window changes. */
+  clip-path: inset(
+    calc(var(--wt, var(--ap-t)) * 1%) calc(var(--wr, var(--ap-r)) * 1%) calc(var(--wb, var(--ap-b)) * 1%)
+      calc(var(--wl, var(--ap-l)) * 1%)
+  );
+}
+.motion .statement__window .statement__lines {
+  display: block;
+}
+.motion .statement__parawrap {
+  z-index: 0;
+  height: 0;
+  margin-top: -100svh;
+}
+.motion .statement__para {
+  position: absolute;
+  top: 51svh;
+  left: 0;
+  padding-bottom: 0;
+}
+
+@media (min-width: 900px) and (orientation: landscape) {
+  .statement {
+    --ap-t: 23;
+    --ap-b: 69;
+    --ap-r: 36;
+    --fs: min(12vw, 20svh, (var(--ap-t) * 1svh - var(--nav-h)) / 0.822);
+  }
+  .statement__field {
+    height: 64svh;
+  }
+  /* Cropped by the viewport edge. */
+  .statement__line--1 {
+    left: -0.3em;
+  }
+  .statement__line--2 {
+    left: 6vw;
+  }
+  .statement__parawrap {
+    height: 0;
+  }
+  .statement__para {
+    position: absolute;
+    right: var(--pad);
+    bottom: 4rem;
+    width: 17.5rem;
+    max-width: none;
+    padding: 0;
+    font-size: 1rem;
+  }
+  .statement__window img {
+    object-position: 40% 27%;
+  }
+  .statement__note {
+    left: auto;
+    right: var(--pad);
+    bottom: auto;
+    top: 50%;
+  }
+
+  /* 180svh of beats, then the 100svh hold under Chapter 3. */
+  .motion .statement {
+    height: 380svh;
+  }
+  .motion .statement__shelf {
+    display: none;
+  }
+  .motion .statement__parawrap {
+    position: sticky;
+    top: 0;
+  }
+  .motion .statement__para {
+    top: 56svh;
+    bottom: auto;
+    left: auto;
+    right: var(--pad);
+  }
+}

@@ -1,0 +1,20 @@
+---
+import type { Dictionary } from '../i18n';
+
+interface Props {
+  t: Dictionary;
+  /** Marks the links as nav items whose colour follows the ground. */
+  navItem?: boolean;
+}
+const { t, navItem = false } = Astro.props;
+---
+
+<div class="lang" role="group" aria-label={t.a11y.language} data-nav-item={navItem ? '' : undefined}>
+  <a class="lang__link" href="/" lang="de" hreflang="de-CH" aria-current={t.locale === 'de' ? 'true' : undefined}
+    >DE</a
+  >
+  <span class="lang__sep" aria-hidden="true">/</span>
+  <a class="lang__link" href="/en/" lang="en" hreflang="en" aria-current={t.locale === 'en' ? 'true' : undefined}
+    >EN</a
+  >
+</div>

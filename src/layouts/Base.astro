@@ -1,0 +1,83 @@
+---
+import '@fontsource-variable/archivo/wdth.css';
+import '@fontsource-variable/newsreader/opsz.css';
+import '../styles/tokens.css';
+import '../styles/base.css';
+import '../styles/nav.css';
+import '../styles/hero.css';
+import '../styles/statement.css';
+import '../styles/treatments.css';
+import '../styles/studio.css';
+import '../styles/closing.css';
+import displayFont from '@fontsource-variable/archivo/files/archivo-latin-wdth-normal.woff2?url';
+import images from '../data/images.json';
+import { DESKTOP_QUERY } from '../config/site';
+import { dictionaries, type Dictionary } from '../i18n';
+
+interface Props {
+  t: Dictionary;
+}
+const { t } = Astro.props;
+
+const srcset = (list: { w: number; src: string }[]) => list.map((i) => `${i.src} ${i.w}w`).join(', ');
+const absolute = (path: string) => (Astro.site ? new URL(path, Astro.site).href : null);
+const canonical = absolute(t.path);
+---
+
+<!doctype html>
+<html lang={t.lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{t.meta.title}</title>
+    <meta name="description" content={t.meta.description} />
+    <meta name="theme-color" content="#140c0a" />
+    <meta property="og:title" content={t.meta.title} />
+    <meta property="og:description" content={t.meta.description} />
+    <meta property="og:type" content="website" />
+    {canonical && <link rel="canonical" href={canonical} />}
+    {
+      canonical &&
+        Object.values(dictionaries).map((d) => (
+          <link rel="alternate" hreflang={d.lang} href={absolute(d.path)} />
+        ))
+    }
+    {canonical && <link rel="alternate" hreflang="x-default" href={absolute('/')} />}
+    <link rel="icon" href="data:," />
+    <link rel="preload" href={displayFont} as="font" type="font/woff2" crossorigin />
+    <link
+      rel="preload"
+      as="image"
+      type="image/avif"
+      media={DESKTOP_QUERY}
+      imagesrcset={srcset(images.hero.desktop.avif)}
+      imagesizes="max(100vw, 178vh)"
+      fetchpriority="high"
+    />
+    <link
+      rel="preload"
+      as="image"
+      type="image/avif"
+      media={`not all and ${DESKTOP_QUERY}`}
+      imagesrcset={srcset(images.hero.mobile.avif)}
+      imagesizes="max(100vw, 82vh)"
+      fetchpriority="high"
+    />
+    <script is:inline>
+      // Pins and reveals are only enabled when scripts run and the visitor
+      // has not asked for reduced motion. Without this class every sequence
+      // renders as static stacked sections.
+      (function (d) {
+        d.classList.add('js');
+        if (!matchMedia('(prefers-reduced-motion: reduce)').matches) d.classList.add('motion');
+      })(document.documentElement);
+    </script>
+  </head>
+  <body>
+    <a class="skip" href="#main">{t.a11y.skip}</a>
+    <slot />
+    <script>
+      import '../scripts/main.ts';
+    </script>
+  </body>
+</html>

@@ -1,0 +1,24 @@
+/* Palette, tuned against the three campaign photographs
+   (see scripts/sample-colours.mjs for the measured values). */
+:root {
+  --ivory: #f2ebdf; /* warm ivory ground */
+  --black: #140c0a; /* near-black, matched to the studio floor and ceiling */
+  --black-lift: #1d1412; /* the dark-on-dark prelude line */
+  --cherry: #7a1120; /* flat cherry: Chapter 5 and the active treatment */
+  --blush: #ecd8d0; /* open treatment category */
+  --steel: #596066; /* index numerals (AA on ivory and blush) */
+  --steel-line: #b9bbb9; /* hairlines */
+  --burgundy-deep: #1f0206; /* hero backdrop at the frame edge */
+  --hero-fade: #2b060b; /* hero backdrop, lower frame (mobile fade) */
+  --hero-fade-0: rgb(43 6 11 / 0);
+
+  /* One easing curve and one duration for every triggered motion. */
+  --ease: cubic-bezier(0.2, 0.75, 0.15, 1);
+  --dur: 750ms;
+
+  --pad: clamp(1.5rem, 2.8vw, 3rem);
+  --nav-h: 3.75rem;
+
+  --font-g: 'Archivo Variable', 'Arial Narrow', Arial, Helvetica, sans-serif;
+  --font-s: 'Newsreader Variable', Georgia, 'Times New Roman', serif;
+}

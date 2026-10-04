@@ -1,0 +1,37 @@
+---
+// Chapter 1. Not pinned; the only scroll-linked motion outside the two
+// signature sequences is the slow image scale and headline drift here.
+import type { Dictionary } from '../i18n';
+import ArtImage from './ArtImage.astro';
+
+interface Props {
+  t: Dictionary;
+}
+const { t } = Astro.props;
+---
+
+<section class="hero" data-hero data-ground="image">
+  <div class="hero__media">
+    <ArtImage
+      asset="hero"
+      alt={t.hero.alt}
+      sizesDesktop="max(100vw, 178vh)"
+      sizesMobile="max(100vw, 82vh)"
+      eager
+    />
+  </div>
+  <div class="hero__fade" aria-hidden="true"></div>
+  <p class="hero__meta meta">
+    {t.hero.meta.map((line) => <span>{line}</span>)}
+  </p>
+  <h1 class="hero__title display reveal" data-reveal="load">
+    {
+      t.hero.lines.map((line, i) => (
+        <span class="rv" style={`--i:${i}`}>
+          <span class="rv__i">{line}</span>
+        </span>
+      ))
+    }
+  </h1>
+  <p class="hero__cue meta" aria-hidden="true">{t.hero.cue}</p>
+</section>

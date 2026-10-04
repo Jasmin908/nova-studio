@@ -1,0 +1,213 @@
+{
+  "hero": {
+    "desktop": {
+      "width": 3840,
+      "height": 2160,
+      "avif": [
+        {
+          "w": 1280,
+          "src": "/img/hero-desktop-1280.9ac900bd.avif"
+        },
+        {
+          "w": 1920,
+          "src": "/img/hero-desktop-1920.2eb9cf83.avif"
+        },
+        {
+          "w": 2560,
+          "src": "/img/hero-desktop-2560.4036c06c.avif"
+        },
+        {
+          "w": 3840,
+          "src": "/img/hero-desktop-3840.bd0bd280.avif"
+        }
+      ],
+      "webp": [
+        {
+          "w": 1280,
+          "src": "/img/hero-desktop-1280.f510f7e8.webp"
+        },
+        {
+          "w": 1920,
+          "src": "/img/hero-desktop-1920.3d1f8b97.webp"
+        },
+        {
+          "w": 2560,
+          "src": "/img/hero-desktop-2560.7b761839.webp"
+        },
+        {
+          "w": 3840,
+          "src": "/img/hero-desktop-3840.8ac85f96.webp"
+        }
+      ],
+      "fallback": "/img/hero-desktop-1920.ebe14b1c.jpg"
+    },
+    "mobile": {
+      "width": 1766,
+      "height": 2160,
+      "avif": [
+        {
+          "w": 720,
+          "src": "/img/hero-mobile-720.69d1686f.avif"
+        },
+        {
+          "w": 1080,
+          "src": "/img/hero-mobile-1080.576d9436.avif"
+        },
+        {
+          "w": 1440,
+          "src": "/img/hero-mobile-1440.a286a898.avif"
+        },
+        {
+          "w": 1766,
+          "src": "/img/hero-mobile-1766.b7452aac.avif"
+        }
+      ],
+      "webp": [
+        {
+          "w": 720,
+          "src": "/img/hero-mobile-720.fbe5e291.webp"
+        },
+        {
+          "w": 1080,
+          "src": "/img/hero-mobile-1080.938db3f0.webp"
+        },
+        {
+          "w": 1440,
+          "src": "/img/hero-mobile-1440.ca76f6f3.webp"
+        },
+        {
+          "w": 1766,
+          "src": "/img/hero-mobile-1766.00e0c7fc.webp"
+        }
+      ],
+      "fallback": "/img/hero-mobile-1766.ec6197ae.jpg"
+    }
+  },
+  "closeup": {
+    "desktop": {
+      "width": 3840,
+      "height": 2160,
+      "avif": [
+        {
+          "w": 1280,
+          "src": "/img/closeup-desktop-1280.76af69b5.avif"
+        },
+        {
+          "w": 1920,
+          "src": "/img/closeup-desktop-1920.940087e1.avif"
+        },
+        {
+          "w": 2560,
+          "src": "/img/closeup-desktop-2560.4dcf09f3.avif"
+        },
+        {
+          "w": 3840,
+          "src": "/img/closeup-desktop-3840.8ea595af.avif"
+        }
+      ],
+      "webp": [
+        {
+          "w": 1280,
+          "src": "/img/closeup-desktop-1280.93f94fbf.webp"
+        },
+        {
+          "w": 1920,
+          "src": "/img/closeup-desktop-1920.1c3130f2.webp"
+        },
+        {
+          "w": 2560,
+          "src": "/img/closeup-desktop-2560.3db61da7.webp"
+        },
+        {
+          "w": 3840,
+          "src": "/img/closeup-desktop-3840.292b8d1b.webp"
+        }
+      ],
+      "fallback": "/img/closeup-desktop-1920.b2f096a9.jpg"
+    },
+    "mobile": {
+      "width": 1766,
+      "height": 2160,
+      "avif": [
+        {
+          "w": 720,
+          "src": "/img/closeup-mobile-720.226d0f10.avif"
+        },
+        {
+          "w": 1080,
+          "src": "/img/closeup-mobile-1080.1bc5e8ef.avif"
+        },
+        {
+          "w": 1440,
+          "src": "/img/closeup-mobile-1440.187a0e31.avif"
+        },
+        {
+          "w": 1766,
+          "src": "/img/closeup-mobile-1766.b71e1c76.avif"
+        }
+      ],
+      "webp": [
+        {
+          "w": 720,
+          "src": "/img/closeup-mobile-720.ef8dd4c6.webp"
+        },
+        {
+          "w": 1080,
+          "src": "/img/closeup-mobile-1080.4dbd05f3.webp"
+        },
+        {
+          "w": 1440,
+          "src": "/img/closeup-mobile-1440.c0d3400e.webp"
+        },
+        {
+          "w": 1766,
+          "src": "/img/closeup-mobile-1766.80fdaedf.webp"
+        }
+      ],
+      "fallback": "/img/closeup-mobile-1766.9be7261b.jpg"
+    }
+  },
+  "studio": {
+    "full": {
+      "width": 3504,
+      "height": 2336,
+      "avif": [
+        {
+          "w": 1280,
+          "src": "/img/studio-full-1280.75b9d2d0.avif"
+        },
+        {
+          "w": 1920,
+          "src": "/img/studio-full-1920.4c166ec2.avif"
+        },
+        {
+          "w": 2560,
+          "src": "/img/studio-full-2560.e719a1cf.avif"
+        },
+        {
+          "w": 3504,
+          "src": "/img/studio-full-3504.75f89356.avif"
+        }
+      ],
+      "webp": [
+        {
+          "w": 1280,
+          "src": "/img/studio-full-1280.7a42532a.webp"
+        },
+        {
+          "w": 1920,
+          "src": "/img/studio-full-1920.ae6dcdf6.webp"
+        },
+        {
+          "w": 2560,
+          "src": "/img/studio-full-2560.5f61c1c1.webp"
+        },
+        {
+          "w": 3504,
+          "src": "/img/studio-full-3504.efa43f02.webp"
+        }
+      ],
+      "fallback": "/img/studio-full-1920.90e6887c.jpg"
+    }
+  }
+}

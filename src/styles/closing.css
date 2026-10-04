@@ -1,0 +1,144 @@
+/* Chapter 5: flat cherry. Mobile composition first. */
+.closing {
+  position: relative;
+  min-height: 100svh;
+  padding-top: calc(var(--nav-h) + 2rem);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--cherry);
+  color: var(--ivory);
+}
+
+.closing__title {
+  padding: 0 var(--pad);
+  font-size: min(12.4vw, 6rem);
+}
+
+.closing__group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 2.75rem var(--pad) 0;
+}
+.closing__label {
+  margin-bottom: 0.9rem;
+}
+/* The only place the serif is large. */
+.closing__disclosure {
+  max-width: 34rem;
+  margin-bottom: 2.75rem;
+  font-size: 1.4375rem;
+  line-height: 1.26;
+}
+
+/* Mobile: a full-width, hard-edged ivory block. */
+.closing__cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: 4.25rem;
+  margin: auto calc(var(--pad) * -1) 0;
+  padding: 1.25rem var(--pad);
+  background: var(--ivory);
+  color: var(--black);
+  font-family: var(--font-g);
+  font-weight: 600;
+  font-size: 0.8125rem;
+  letter-spacing: 0.18em;
+}
+.closing__cta .arrow {
+  font-size: 1.25rem;
+  transition: transform var(--dur) var(--ease);
+}
+.closing__cta:not([href]) {
+  cursor: default;
+}
+@media (hover: hover) {
+  .closing__cta:hover .arrow {
+    transform: translateX(5px);
+  }
+}
+
+@media (min-width: 900px) and (orientation: landscape) {
+  .closing {
+    display: block;
+    height: 100svh;
+    min-height: 36rem;
+    padding: 0;
+  }
+  /* Anchored bottom-left, sitting low but clear of the footer boundary. */
+  .closing__title {
+    position: absolute;
+    left: var(--pad);
+    bottom: clamp(2.5rem, 6svh, 4.5rem);
+    padding: 0;
+    font-size: min(7.6vw, 21svh);
+  }
+  .closing__group {
+    position: absolute;
+    top: 17svh;
+    right: var(--pad);
+    display: block;
+    width: min(36rem, 35vw);
+    padding: 0;
+  }
+  .closing__label {
+    margin-bottom: 1.25rem;
+  }
+  .closing__disclosure {
+    margin-bottom: 2.25rem;
+    font-size: clamp(1.5rem, 2.15vw, 2.5rem);
+    line-height: 1.2;
+  }
+  /* Uppercase grotesk with an arrow and a hairline underline. */
+  .closing__cta {
+    display: inline-flex;
+    justify-content: flex-start;
+    gap: 0.9rem;
+    min-height: 44px;
+    margin: 0;
+    padding: 0 0 0.35rem;
+    background: none;
+    color: inherit;
+    border-bottom: 1px solid currentColor;
+  }
+}
+
+/* ---------- Footer ---------- */
+
+.footer {
+  background: var(--black);
+  color: var(--ivory);
+  padding: 3.5rem var(--pad) 2.25rem;
+  display: grid;
+  justify-items: start;
+  gap: 0.55rem;
+  font-size: 0.9375rem;
+}
+.footer__name {
+  margin-bottom: 0.9rem;
+  font-family: var(--font-g);
+  font-weight: 700;
+  font-size: 0.875rem;
+  letter-spacing: 0.08em;
+}
+.footer__credit {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25em;
+  min-height: 44px;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.3em;
+}
+.footer__credit:not([href]) {
+  cursor: default;
+}
+.footer .lang {
+  margin: 0.5rem 0 0 -1.5rem;
+}
+.footer__copy {
+  margin-top: 0.25rem;
+}

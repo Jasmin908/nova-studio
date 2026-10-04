@@ -1,0 +1,157 @@
+/* Tiny, no background bar. Type colour follows the ground beneath it. */
+.nav {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 50;
+  height: var(--nav-h);
+  padding: 0 var(--pad);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--ivory);
+  pointer-events: none;
+  transition: transform var(--dur) var(--ease);
+}
+.nav > * {
+  pointer-events: auto;
+}
+.nav[data-theme='dark'] {
+  color: var(--black);
+}
+.nav.is-hidden {
+  transform: translateY(-100%);
+}
+.nav:focus-within {
+  transform: none;
+}
+/* Visible, but never animating, during the two pinned sequences. */
+.nav.no-anim {
+  transition: none;
+}
+/* Over the flat ivory band of Chapter 4: with this colour, difference
+   blending gives near-black on the band and ivory on the near-black ground. */
+.nav.on-band {
+  mix-blend-mode: difference;
+  color: #fff7e9;
+}
+
+.nav__right {
+  display: flex;
+  align-items: center;
+}
+.nav__links {
+  display: none;
+}
+.nav__item,
+.lang {
+  font-family: var(--font-g);
+  font-weight: 500;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+}
+.nav__item {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  min-width: 44px;
+}
+.nav__wordmark {
+  font-family: var(--font-g);
+  font-weight: 800;
+  font-size: 0.8125rem;
+  letter-spacing: 0.34em;
+}
+.nav__menu {
+  justify-content: flex-end;
+  margin-left: 0.25rem;
+}
+
+/* DE / EN. The hit areas extend outwards so the label stays tight. */
+.lang {
+  display: inline-flex;
+  align-items: center;
+}
+.lang__link {
+  display: inline-flex;
+  align-items: center;
+  min-width: 44px;
+  min-height: 44px;
+}
+.lang__link:first-child {
+  justify-content: flex-end;
+}
+.lang__link[aria-current] {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.4em;
+}
+.lang__sep {
+  padding: 0 0.45em;
+}
+
+@media (min-width: 900px) and (orientation: landscape) {
+  .nav__links {
+    display: flex;
+    gap: 2.25rem;
+    margin-right: 1.25rem;
+  }
+  .nav__menu {
+    display: none;
+  }
+  .nav .lang {
+    margin-right: -1.7rem;
+  }
+}
+
+/* ---------- Mobile menu: full-screen near-black overlay ---------- */
+
+.menu {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: var(--black);
+  color: var(--ivory);
+  opacity: 0;
+  transition: opacity var(--dur) var(--ease);
+}
+.menu.is-open {
+  opacity: 1;
+}
+.menu::backdrop {
+  background: transparent;
+}
+.menu__bar {
+  height: var(--nav-h);
+  padding: 0 var(--pad);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.menu__bar .nav__item {
+  justify-content: flex-end;
+}
+.menu__list {
+  padding: 12svh var(--pad) 0;
+  display: grid;
+  gap: 0.35rem;
+}
+.menu__link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-family: var(--font-g);
+  font-weight: 800;
+  font-stretch: 78%;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  font-size: min(13.5vw, 12svh);
+}
+html.menu-open {
+  overflow: hidden;
+}

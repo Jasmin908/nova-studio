@@ -1,0 +1,18 @@
+---
+// The arrows from the copy ("→" and "↗"), drawn as hard-edged strokes so
+// they match the grotesk on every platform. Decorative for screen readers.
+interface Props {
+  diagonal?: boolean;
+}
+const { diagonal = false } = Astro.props;
+---
+
+<svg class="arrow" viewBox="0 0 24 24" width="1em" height="1em" aria-hidden="true" focusable="false">
+  {
+    diagonal ? (
+      <path d="M6 18 18 6M8 6h10v10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" />
+    ) : (
+      <path d="M2 12h19M14 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" />
+    )
+  }
+</svg>

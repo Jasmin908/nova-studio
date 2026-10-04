@@ -1,0 +1,62 @@
+---
+// Chapter 3. A typographic list of real buttons. The first category is open
+// in the markup itself, so prices are visible without any interaction.
+import type { Dictionary } from '../i18n';
+import { formatDuration, formatPrice, treatments } from '../data/treatments';
+
+interface Props {
+  t: Dictionary;
+}
+const { t } = Astro.props;
+
+const categories = t.treatments.categories.map((name, index) => ({
+  name,
+  index: String(index + 1).padStart(2, '0'),
+  items: treatments.filter((item) => item.category === index),
+}));
+---
+
+<section class="treat" id={t.ids.treatments} data-ground="light">
+  <h2 class="sr-only">{t.nav.treatments}</h2>
+  <ul class="treat__cats">
+    {
+      categories.map((cat, i) => (
+        <li class:list={['cat', { 'is-open': i === 0 }]} data-cat>
+          <h3 class="cat__head">
+            <button
+              class="cat__btn"
+              type="button"
+              id={`cat-${cat.index}-btn`}
+              aria-expanded={i === 0 ? 'true' : 'false'}
+              aria-controls={`cat-${cat.index}`}
+            >
+              <span class="cat__idx meta">{cat.index}</span>
+              <span class="cat__name display">{cat.name}</span>
+            </button>
+          </h3>
+          <div
+            class="cat__panel"
+            id={`cat-${cat.index}`}
+            role="region"
+            aria-labelledby={`cat-${cat.index}-btn`}
+            hidden={i !== 0}
+          >
+            <ul class="cat__list">
+              {cat.items.map((item) => (
+                <li class="trt">
+                  <h4 class="trt__name">{item.name}</h4>
+                  <p class="trt__desc serif">{item[t.locale]}</p>
+                  <p class="trt__figures meta">
+                    <span class="trt__dur">{formatDuration(item.minutes)}</span>
+                    <span class="trt__price">{formatPrice(item.chf)}</span>
+                  </p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </li>
+      ))
+    }
+  </ul>
+  <p class="treat__note serif">{t.treatments.note}</p>
+</section>

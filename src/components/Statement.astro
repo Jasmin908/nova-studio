@@ -1,0 +1,39 @@
+---
+// Chapter 2, signature moment. The image sits at its final full-bleed
+// position for the whole sequence; only the clip window on it grows.
+// The ivory copy of the statement lives inside that window, so the type
+// turns ivory exactly where the image passes beneath it.
+import type { Dictionary } from '../i18n';
+import ArtImage from './ArtImage.astro';
+
+interface Props {
+  t: Dictionary;
+}
+const { t } = Astro.props;
+---
+
+<section class="statement" data-seq="aperture">
+  <div class="statement__stage">
+    <div class="statement__field" data-ground="light">
+      <div class="statement__shelf" aria-hidden="true"></div>
+      <h2 class="statement__lines display">
+        {t.statement.lines.map((line, i) => <span class={`statement__line statement__line--${i + 1}`}>{line}</span>)}
+      </h2>
+    </div>
+    <div class="statement__window" data-ground="image">
+      <ArtImage
+        asset="closeup"
+        alt={t.statement.alt}
+        sizesDesktop="max(100vw, 178vh)"
+        sizesMobile="max(100vw, 82vh)"
+      />
+      <div class="statement__lines display" aria-hidden="true">
+        {t.statement.lines.map((line, i) => <span class={`statement__line statement__line--${i + 1}`}>{line}</span>)}
+      </div>
+      <p class="statement__note meta">{t.statement.note}</p>
+    </div>
+  </div>
+  <div class="statement__parawrap">
+    <p class="statement__para serif">{t.statement.paragraph}</p>
+  </div>
+</section>

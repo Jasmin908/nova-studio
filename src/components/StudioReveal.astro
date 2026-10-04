@@ -1,0 +1,45 @@
+---
+// Chapter 4, signature moment. A flat ivory band crosses the dark prelude,
+// stops on the slit of light measured in the photograph, and becomes the
+// window that opens onto the room. No text is placed over the photograph;
+// location, hours and the editorial sentence follow on near-black.
+import type { Dictionary } from '../i18n';
+import ArtImage from './ArtImage.astro';
+
+interface Props {
+  t: Dictionary;
+}
+const { t } = Astro.props;
+---
+
+<div class="groundfade" data-ground="fade" aria-hidden="true"></div>
+
+<section class="blade" id={t.ids.studio} data-seq="blade" data-ground="dark">
+  <div class="blade__stage">
+    <div class="blade__dark">
+      <h2 class="blade__line display">{t.studio.line}</h2>
+    </div>
+    <div class="blade__photo">
+      <div class="blade__imgbox">
+        <ArtImage asset="studio" alt={t.studio.alt} sizesDesktop="max(100vw, 150vh)" sizesMobile="150vh" />
+      </div>
+    </div>
+    <div class="blade__band" aria-hidden="true">
+      <div class="blade__line display">{t.studio.line}</div>
+    </div>
+  </div>
+</section>
+
+<section class="info" data-ground="dark">
+  <dl class="info__facts">
+    <div class="info__group">
+      <dt class="meta">{t.studio.locationLabel}</dt>
+      <dd>{t.studio.location}</dd>
+    </div>
+    <div class="info__group">
+      <dt class="meta">{t.studio.hoursLabel}</dt>
+      {t.studio.hours.map((line) => <dd>{line}</dd>)}
+    </div>
+  </dl>
+  <p class="info__sentence serif">{t.studio.sentence}</p>
+</section>
