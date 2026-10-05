@@ -1,14 +1,14 @@
 /**
- * FORMA STUDIO DESTINATION — MUST BE SET BEFORE DEPLOYMENT.
+ * FORMA STUDIO DESTINATION.
  *
  * This is the only place the Forma Studio website URL is defined. It is used
- * by the Chapter 5 call to action and by the footer credit.
+ * by the Chapter 5 call to action and by the footer credit, which both open
+ * it in a new tab.
  *
- * While it is null, both render exactly as designed but without navigation
- * (no href). Replace null with the real URL, e.g. 'https://…', and do not
- * put an invented address here.
+ * If it is set to null, both render exactly as designed but without
+ * navigation (no href). Do not put an invented address here.
  */
-export const FORMA_STUDIO_URL: string | null = null;
+export const FORMA_STUDIO_URL: string | null = 'https://forma-webdesign.netlify.app/';
 
 if (!FORMA_STUDIO_URL) {
   console.warn(

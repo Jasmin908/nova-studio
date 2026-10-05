@@ -344,9 +344,11 @@ for (const locale of LOCALES) {
     return {
       contact: anchors.filter((a) => /^(tel|mailto):/.test(a.getAttribute('href') || '')).length,
       forms: document.querySelectorAll('form, input, textarea, select').length,
-      cta: document.querySelector('.closing__cta').getAttribute('href'),
-      credit: document.querySelector('.footer__credit').getAttribute('href'),
-      external: anchors.filter((a) => /^https?:/.test(a.getAttribute('href') || '')).length,
+      forma: ['.closing__cta', '.footer__credit'].map((s) => {
+        const a = document.querySelector(s);
+        return [a.getAttribute('href'), a.target, a.rel].join(' ');
+      }),
+      external: anchors.filter((a) => /^https?:/.test(a.getAttribute('href') || '')).map((a) => a.getAttribute('href')),
       h1: document.querySelectorAll('h1').length,
       heroDisclosure: /fikti|fiction/i.test(document.querySelector('.hero').textContent),
       textOverStudio: document.querySelector('.blade__photo').innerText.trim(),
@@ -355,9 +357,12 @@ for (const locale of LOCALES) {
     };
   });
   check(`content ${locale.path}: no form, phone or email`, content.contact === 0 && content.forms === 0);
+  // The Chapter 5 CTA and the footer credit are the only external links.
+  const forma = 'https://forma-webdesign.netlify.app/ _blank noopener noreferrer';
   check(
-    `content ${locale.path}: Forma Studio links render without navigation until the URL is set`,
-    content.cta === null && content.credit === null && content.external === 0,
+    `content ${locale.path}: CTA and footer credit open Forma Studio in a new tab; no other external links`,
+    content.forma.every((link) => link === forma) && content.external.length === 2,
+    `${content.forma.join(' | ')} | external: ${content.external.join(', ')}`,
   );
   check(`content ${locale.path}: one h1, no disclosure in the hero`, content.h1 === 1 && !content.heroDisclosure);
   check(`content ${locale.path}: no text over the studio photograph`, content.textOverStudio === '');
